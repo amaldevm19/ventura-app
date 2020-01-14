@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col s12 m12 l12 z-depth-3 white-text teal">
+        <h5 class=" center">{{pageData.pageHeading}}</h5>
+    </div>
+</div>
+{{#if pageName}}
+    <a class='waves-effect waves-light btn red accent-4' href="/materials/material-list">Cancel filter</a>
+{{else }}
+<ul class="pagination">
+  <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+  {{#each pageData.pageArray}}
+  <li class="waves-effect"><a href="/materials/material-list?page={{this}}">Page {{this}}</a></li>
+  {{/each}}
+  <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+</ul>
+{{/if}}
+<button class='filter btn modal-trigger' id='filter_category_button' data-target="modal1" >Filter category</button>
+<button class='filter btn modal-trigger' id='filter_model_button' data-target="modal2" >Filter model</button>
+
+<a class="btn-floating btn-large waves-effect waves-light red right" href="/materials/material-list-add"><i class="material-icons">add</i></a>
+
+<div class="row">
+    <table class="highlight">
+        <thead>
+          <tr>
+              <th>Model</th>
+              <th>Category</th>
+              <th>Brand</th>
+              <th>Description</th>
+              <th>Delete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {{#each materialTable}}
+          <tr>
+            <td>{{this.material_model}}</td>
+            <td>{{this.material_category}}</td>
+            <td>{{this.material_brand}}</td>
+            <td>{{this.material_description}}</td>
+            <td><a class="btn-floating btn-small waves-effect waves-light red" href="/materials/material-list-add/{{this.material_model}}"><i class="material-icons">delete</i></a></td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+</div>
+<div id="modal1" class="modal" >
+    <div class="modal-content">
+    <h4>Select Category</h4>
+      <select id="filter_category" class="input-field">
+        <option value="">Choose one</option>
+        {{#each filterList.category}}
+            <option value="{{this}}">{{this}}</option>
+          {{/each}}
+    </select>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Filter</a>
+    </div>
+</div>
+<div id="modal2" class="modal" >
+    <div class="modal-content">
+    <h4>Select model</h4>
+      <select id="filter_model" class="input-field">
+        <option value="">Choose one</option>
+        {{#each filterList.model}}
+            <option value="{{this}}">{{this}}</option>
+          {{/each}}
+    </select>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Filter</a>
+    </div>
+</div>
+<script>
+  $(() => {
+    $('#filter_category').formSelect();
+    $('#filter_model').formSelect();
+    $('#modal1').modal();
+    $('#modal2').modal();
+    $("#filter_category_button").unbind().bind("click", (e) => {
+        let elems = document.querySelectorAll('#modal1');
+        let instances = M.Modal.init(elems, {onCloseEnd: ()=>{
+            let filter_cat_name = document.getElementById('filter_category');
+            let filter_cat = filter_cat_name.value.trim();
+            window.location.href = `/materials/material-list?filter_cat=${filter_cat}&filter_name=material_category`;
+        }});
+    });
+    $("#filter_model_button").unbind().bind("click", (e) => {
+        let elems = document.querySelectorAll('#modal2');
+        let instances = M.Modal.init(elems, {onCloseEnd: ()=>{
+            let filter_cat_name = document.getElementById('filter_model');
+            let filter_cat = filter_cat_name.value.trim();
+            window.location.href = `/materials/material-list?filter_cat=${filter_cat}&filter_name=material_model`;
+        }});
+    });
+
+  });
+</script>

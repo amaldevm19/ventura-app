@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col s12 m12 l12 z-depth-3 white-text teal">
+        <h5 class=" center">{{pageData.pageHeading}}</h5>
+    </div>
+</div>
+<a class="btn-floating btn-large waves-effect waves-light red right" href="/materials/material-request-add-new"><i class="material-icons">add</i></a>
+
+<div class="row">
+    <table class="highlight">
+        <thead>
+            <tr>
+                <th>Request Number</th>
+                <th>Requester</th>
+                <th>Request Status</th>
+                <th>Created on</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#each pageData.material_requests}}
+          <tr>
+            <td>{{this.material_request_number}}</td>
+            <td>{{this.material_requester}}</td>
+            <td><a class="waves-effect waves-light btn changeStatus modal-trigger" data-target="modal1" id="{{this.material_request_number}}">{{this.material_request_status}}</a></td>
+            <td>{{this.created_at}}</td>
+            <td><a class="btn-floating btn-small waves-effect waves-light green" href="/materials/material-request-edit/{{this.material_request_number}}"><i class="material-icons">edit</i></a></td>
+            <td><a class="btn-floating btn-small waves-effect waves-light red" href="/materials/material-request-delete/{{this.material_request_number}}"><i class="material-icons">delete</i></a></td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+</div>
+<div id="modal1" class="modal" >
+    <div class="modal-content">
+    <h4>Change Status</h4>
+      <select id="change_status" class="input-field">
+        <option value="Open">Open</option>
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+    </select>
+    </div>
+    <div class="modal-footer">
+        <button class="modal-close waves-effect waves-green btn-flat" id="submit_status">Submit</button>
+    </div>
+</div>
+<script>
+$(() => {
+    $('#change_status').formSelect();
+    $('#modal1').modal();
+
+    let master_materail_request_number;
+    $(".changeStatus").click((event)=>{
+        master_materail_request_number = event.target.id;
+    })
+
+    $("#submit_status").click((event)=>{
+        event.preventDefault();
+        console.log();
+        let changed_status = $("#change_status option:selected").val();
+       location.href=`/materials/material-request-change-status?reqNumber=${master_materail_request_number}&status=${changed_status}`;
+    })
+    let materialStatus = $(".changeStatus");
+    materialStatus.each((item)=>{
+        if(materialStatus[item].innerText == 'COMPLETED'){
+            let classList = materialStatus[item].getAttribute('class');
+            classList += " green";
+            materialStatus[item].setAttribute('class',classList)
+        }else if(materialStatus[item].innerText == 'PENDING'){
+            let classList = materialStatus[item].getAttribute('class');
+            classList += " yellow";
+            materialStatus[item].setAttribute('class',classList)
+        }else if(materialStatus[item].innerText == 'OPEN'){
+            let classList = materialStatus[item].getAttribute('class');
+            classList += " teal";
+            materialStatus[item].setAttribute('class',classList)
+        }else if(materialStatus[item].innerText == 'DELIVERY'){
+            let classList = materialStatus[item].getAttribute('class');
+            materialStatus[item].setAttribute('disabled','disabled')
+            classList += " red";
+            materialStatus[item].setAttribute('class',classList)
+        }
+    })
+ })
+</script>
+ 

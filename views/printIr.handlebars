@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <style>
+        .col1 {
+            margin-top: 1em;
+            padding-top: 1em;
+            border: black solid 2px;
+        }
+
+        .col2 {}
+
+        .col3 {
+
+            border: black solid 2px;
+
+        }
+
+        .col4 {}
+
+        .col5 {}
+
+        .col6 {
+
+            padding-top: 1em;
+            padding-bottom: 2em
+        }
+
+        .col7 {}
+
+        .col8 {}
+
+        .col9 {}
+
+        .col10 {}
+
+        .col11 {}
+
+        .col12 {}
+
+        .col13 {}
+
+        .col14 {}
+
+        .col15 {}
+
+        .col16 {}
+
+        .col17 {
+
+            padding-top: 1em;
+        }
+
+        .col18 {}
+
+        .col19 {}
+
+        .col20 {}
+
+        .col21 {
+
+            padding-top: 1em;
+            padding-bottom: 1em
+        }
+
+        .row1 {}
+
+        .bCol {
+            border: black 1px;
+            border-style: solid;
+            border-width: thin;
+        }
+
+        .bleft {
+            border-left: 2px solid black;
+
+        }
+
+        .bbottom {
+            border-bottom: 2px solid black;
+
+        }
+
+        .bright {
+            border-right: 2px solid black;
+
+        }
+
+        .topBottomP {
+            padding-top: 1em;
+            padding-bottom: 1em
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row col1 ">
+            <div class="col">
+                <img src="/images/irImg.png" width="250px" alt="sgcc">
+            </div>
+            <div class="col">
+                <p>Khalidia Palace Hotel
+                    2B+G+M+10FLOORS+CLIENT’SRESIDENCE/ROOF
+                    on Plot no. 1240578, Muraqabat Dubai. UAE</p>
+                <h3>
+                    INSPECTION REQUEST
+                </h3>
+            </div>
+            <div class="col">
+                <img src="/images/irImg2.png" width="250px" alt="acc">
+            </div>
+        </div>
+        <div class="row col2 bleft bright">
+            <div class="col">
+                <p>Issued to:</p>
+            </div>
+        </div>
+        <div class="row col3">
+            <div class="col-3">
+                <p class="topBottomP"><b>Inspection Request No: {{doc.irNo}}</b></p>
+            </div>
+            <div class="col">
+                <div class="row row1">
+                    <div class="col bCol">
+                        <p>Originator:</p>
+                    </div>
+                    <div class="col bCol">
+                        <P>Spec No:</P>
+                    </div>
+                    <div class="col bCol">
+                        <p>Discipline:</p>
+                    </div>
+                    <div class="col bCol">
+                        <p>Zone:</p>
+                    </div>
+                    <div class="col bCol">
+                        <p>Level:</p>
+                    </div>
+                    <div class="col bCol">
+                        <p> SR No:</p>
+                    </div>
+                    <div class="col bCol">
+                        <p>Rev:</p>
+                    </div>
+
+                </div>
+                <div class="row row1">
+                    <div class="col bCol">
+                        {{doc.irOrginator}}
+                    </div>
+                    <div class="col bCol">
+                        {{doc.irSpec}}
+                    </div>
+                    <div class="col bCol">
+                        {{doc.irDiscipline}}
+                    </div>
+                    <div class="col bCol">
+                        {{doc.irZone}}
+                    </div>
+                    <div class="col bCol">
+                        {{doc.irLevel}}
+                    </div>
+                    <div class="col bCol">
+                        {{doc.irSrNumber}}
+                    </div>
+                    <div class="col bCol">
+                        {{doc.irRevision}}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="row col4 bleft bright ">
+            <div class="col">
+                <p><b>Drawing No: {{doc.irDrawingNumber}}</b></p>
+            </div>
+            <div class="col">
+                <p><b>Date Of Insp. : {{doc.irInspectionDate}}</b></p>
+            </div>
+            <div class="col">
+                <p><b>{{doc.irRequestedDate}}</b></p>
+            </div>
+        </div>
+        <div class="row col5 bleft bright bbottom">
+            <div class="col">
+            </div>
+            <div class="col">
+                <p><b>Time Of Insp: {{doc.irInspectionTime}} </b></p>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+        <div class="row col6 bleft bright">
+            <div class="col">
+                <p>Floor Level:<b>{{doc.irFloorLevel}}</b></p>
+            </div>
+            <div class="col">
+                <p>Location: <b>{{doc.irLocation}}</b></p>
+                <p>Date of Inspection by Consultant:</p>
+            </div>
+            <div class="col">
+                <p>Area:<b>{{doc.irArea}}</b></p>
+            </div>
+        </div>
+        <div class="row col7 bleft bright bbottom">
+            <div class="col-2">
+                <p>Work Requested for Inspection:</p>
+            </div>
+            <div class="col">
+                <p><b>{{doc.irWorkRequested}}</b></p>
+            </div>
+        </div>
+        <div class="row col8 bleft bright">
+            <div class="col">
+                <p>Attachments</p>
+            </div>
+            <div class="col">
+
+            </div>
+            <div class="col">
+                <input type="checkbox">Checklist
+            </div>
+            <div class="col">
+                <input type="checkbox">Sketch
+            </div>
+            <div class="col">
+                <input type="checkbox">Others
+            </div>
+        </div>
+        <div class="row col8 bleft bright">
+            <div class="col">
+                Work Coordination:
+            </div>
+            <div class="col">
+                <input type="checkbox">Structural
+            </div>
+            <div class="col">
+                <input type="checkbox">Architectural
+            </div>
+            <div class="col">
+                <input type="checkbox">Electrical
+            </div>
+            <div class="col">
+                <input type="checkbox">Mechanical
+            </div>
+        </div>
+        <div class="row col9 bleft bright bbottom">
+            <div class="col">
+                <p>Requested by: <b>{{doc.irRequestedBy}}</b> </p>
+            </div>
+            <div class="col">
+                <p>Signature:</p>
+            </div>
+            <div class="col">
+                <p>Date: <b>{{doc.irRequestedDate}}</b></p>
+            </div>
+        </div>
+
+        <div class="row col10 bleft bright">
+            <div class="col">
+                <p>Inspection Report Comments: Work Coordination</p>
+            </div>
+        </div>
+        <div class="row col11 bleft bright">
+            <div class="col">
+                <p><input type="checkbox">Architectural</p>
+                <p><input type="checkbox">Structural</p>
+            </div>
+            <div class="col">
+                <p><input type="checkbox">MEP</p>
+                <p><input type="checkbox">Mechanical</p>
+            </div>
+            <div class="col">
+                <p><input type="checkbox">AC</p>
+                <p><input type="checkbox">Others</p>
+            </div>
+            <div class="col">
+                <p><input type="checkbox">Lift</p>
+            </div>
+
+        </div>
+        <div class="row col12 bleft bright bbottom">
+            <div class="col">
+                <p>----------------------------------------------------------------------------------------
+                    ------------------------------------------------------------------------------
+                    ----------------------------------------------------------------------------------------
+                    --------------------------------------------------------------------------------------------------
+                    ------------------------------------------------------------------------------
+                    -----------------------------------------------------------------------------------
+                </p>
+            </div>
+        </div>
+        <div class="row col13 bleft bright bbottom">
+            <div class="col">
+                <p>QC Comments : --------------------------------------------------------------------------------
+                    ------------------------------------------------------------------------------
+                    ----------------------------------------------------------------------------------------
+                    --------------------------------------------------------------------------------------
+                    ------------------------------------------------------------------------------
+                    ---------------------------------------------------------------------------------
+                </p>
+            </div>
+        </div>
+        <div class="row col14 bleft bright bbottom">
+            <div class="col">
+                <p>SGCC QA/QC Engineer:</p>
+            </div>
+            <div class="col">
+                <p>Signature & Date: </p>
+            </div>
+            <div class="col">
+                <p>Project Manager: </p>
+            </div>
+            <div class="col">
+                <p>Signature & Date:</p>
+            </div>
+
+        </div>
+        <div class="row col15 bleft bright bbottom">
+            <div class="col">
+                <p>Received by :</p>
+            </div>
+            <div class="col">
+                <p>Date:</p>
+            </div>
+            <div class="col">
+                <p>Time:</p>
+            </div>
+        </div>
+        <div class="row col16 bleft bright bbottom">
+            <div class="col">
+                <p>----------------------------------------------------------------------------------------
+                    ------------------------------------------------------------------------------
+                    ----------------------------------------------------------------------------------------
+                    --------------------------------------------------------------------------------------
+                    ----------------------------------------------------------------------------------------
+                    ----------------------------------------------------------------------------------------</p>
+            </div>
+        </div>
+        <div class="row col17 bleft bright ">
+            <div class="col">
+                <p>Inspection Report Comments:</p>
+            </div>
+            <div class="col">
+                <p>A) Approved <input type="checkbox" /></p>
+            </div>
+            <div class="col">
+                <p>B ) Approved As Noted<input type="checkbox" /></p>
+            </div>
+            <div class="col">
+                <p>C ) Rejected<input type="checkbox" /></p>
+            </div>
+        </div>
+        <div class="row col18 bleft bright bbottom">
+            <div class="col">
+                <p>Name :</p>
+            </div>
+            <div class="col">
+                <p>Date:</p>
+            </div>
+            <div class="col">
+                <p>Sign:</p>
+            </div>
+        </div>
+        <div class="row col19 bleft bright">
+            <div class="col">
+                <p><b>Final Closure of IR By:</b></p>
+            </div>
+            <div class="col">
+                <p>Date:</p>
+            </div>
+            <div class="col">
+                <p>Time:</p>
+            </div>
+        </div>
+        <div class="row col20 bleft bright bbottom">
+            <div class="col">
+                <p>Name:</p>
+            </div>
+            <div class="col">
+                <p><b>Dept: ( CONSULTANT)</b></p>
+            </div>
+            <div class="col">
+                <p>Sign:</p>
+            </div>
+        </div>
+        <div class="row col21 bleft bright bbottom">
+            <div class="col">
+                <p><b>Main Contractor Sign & Stamped:</b></p>
+            </div>
+            <div class="col">
+                <p>Date:</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>

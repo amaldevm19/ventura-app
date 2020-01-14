@@ -1,0 +1,12 @@
+<h1>All Messages </h1>
+<h3>Logged in User: - {{data.user.email}}</h3>
+<ul>
+    {{#if data.message}}
+    {{#each data.message}}
+    <li>{{this}}</li>
+    {{/each}}
+    {{else}}
+    <li>No messages to display</li>
+    {{/if}}
+</ul>
+

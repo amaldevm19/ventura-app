@@ -1,0 +1,25 @@
+<nav>
+    <div class="nav-wrapper purple accent-4 ">
+        <a href="#" data-target="slide-out" class="sidenav-trigger text-white"><i class="material-icons">menu</i></a>
+        <a href="/" class="brand-logo hide-on-med-and-down">Ventura Global</a>
+        <a href="/" class="brand-logo hide-on-large-only center col s12 m6 flow-text" style="width: 500px;" >Ventura Global</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/">Login</a></li>
+            <li><a href="/users/register">Register</a></li>
+        </ul>
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <li><a href="/">Login</a></li>
+                    <li><a href="/users/register">Register</a></li>
+                </div>
+            </li>
+        </ul> 
+    </div>
+</nav>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.sidenav').sidenav();
+    });
+</script>

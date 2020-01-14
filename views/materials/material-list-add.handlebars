@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col s12 m12 l12 z-depth-3 white-text teal">
+        <h5 class=" center">{{pageData.pageHeading}}</h5>
+        <a class="waves-effect waves-light btn right modal-trigger" href="#add_category">New Category</a>
+        <a class="waves-effect waves-light btn right modal-trigger" href="#add_brand">New Brand</a>
+    </div>
+</div>
+<a class="btn-floating btn-large waves-effect waves-light red right section " href="/materials/material-list"><i class="material-icons">arrow_back</i></a>
+<div class="row">
+    <div class="col s12 m3 l3"></div>
+    <form class="col s12 m6 l6 " method="POST" action="" id="add_new">
+        <div class="row">
+            <div class="input-field col s12 m12 l12 ">
+                <input id="material_modal" type="text" class="validate" name="materialModal">
+                <label for="material_modal" class="">Model</label>
+            </div>
+            <div class="input-field col s12 m12 l12 ">
+                <textarea id="material_description" class="materialize-textarea" name="materialDescription"></textarea>
+                <label for="material_description" class="">Description</label>
+            </div>
+            <div class="input-field col s12 m12 l12 ">
+                <select id="material_category" name="materialCategory">
+                    <option value="" disabled selected>Choose your option</option>
+                    {{#each catAndbrand.categoryArray}}
+                    <option value="{{this.material_category}}">{{this.material_category}}</option>
+                    {{/each}}
+                </select>
+                <label for="material_category" class="">Category</label>
+            </div>
+            <div class="input-field col s12 m12 l12 ">
+                <select id="material_brand" name="materialBrand">
+                    <option value="" disabled selected>Choose your option</option>
+                    {{#each catAndbrand.brandArray}}
+                    <option value="{{this.material_brand}}">{{this.material_brand}}</option>
+                    {{/each}}
+                </select>
+                <label for="material_brand" class="">Brand</label>
+            </div>
+            <button type="submit" class="waves-effect waves-light btn">Add</button>
+        </div>  
+    </form>
+</div>
+<div id="add_category" class="modal col s9 m8 l8">
+    <div class="modal-content">
+        <h4>Add new Category</h4>
+        <form class="col s12 m8 l8 " method="post" action="/materials/add-category">
+            <div class="row">
+                <div class="input-field col s12 m12 l12 ">
+                    <input id="category_name" type="text" class="validate" name="categoryName">
+                    <label for="category_name" class="">Category name:</label>
+                </div>
+                <button type="submit" class="waves-effect waves-light btn">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="add_brand" class="modal col s9 m8 l8">
+    <div class="modal-content">
+        <h4>Add new Brand</h4>
+        <form class="col s12 m8 l8 " method="post" action="/materials/add-brand">
+            <div class="row">
+                <div class="input-field col s12 m12 l12 ">
+                    <input id="brand_name" type="text" class="validate" name="addbrandName">
+                    <label for="brand_name" class="">Brand name:</label>
+                </div>
+                <button type="submit" class="waves-effect waves-light btn">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let elems = document.querySelectorAll('.modal');
+        let instances = M.Modal.init(elems);
+        M.textareaAutoResize($('#material_description'));
+        $('select').formSelect();
+        $( "#add_new" ).submit(function( event ) {
+            event.preventDefault();
+            let data = {};
+            data.materialModal = $("#material_modal").val();
+            $("#material_modal").val('');
+            data.materialDescription = $("#material_description").val();
+            $("#material_description").val('');
+            data.materialCategory = $("#material_category").val();
+            $("#material_category").val('');
+            data.materialBrand = $("#material_brand").val(); 
+            $("#material_brand").val(''); 
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "/materials/material-list-add",
+                data: data,
+                success: function (){
+                    M.toast({html: 'Successfully added new material to database!!!', classes: ' red lighten-1 rounded', displayLength:1000, completeCallback: function(){
+                        location.reload(true);
+                    }});
+                }
+               
+                });
+            
+        });
+
+    });
+
+</script>

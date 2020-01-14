@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="/stylesheets/style.css">
+        <title>Ventua | {{pageData.title}}</title>
+    <style>
+        .sidebar-ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background-color: #f1f1f1;
+        height: 100%;
+        
+        }
+        .sidebar-div {
+        margin: 0% !important;
+        padding: 0% !important;
+        width: 100%;
+        background-color: #f3e5f5;
+        height: auto !important;;
+        overflow: auto !important;
+        
+        }
+        .navbar-li-a {
+        display: block;
+        width: 100%;
+        color: #000;
+        margin: 0;
+        padding: 12px 20px;
+        text-decoration: none;
+        }
+        .navbar-li-a:hover:not(.active) {
+        background-color: rgb(8, 92, 202);
+        color: white;
+        }
+        .active-li a{
+        background-color: rgb(8, 92, 202);
+        color: white;
+        }
+        .content{
+            margin: 0;
+            padding: 0;
+            width:100%;
+
+        }
+    </style>
+    </head>
+    <body>
+        {{> header}}
+        <div class="row" style="min-height: 30rem;">
+            <div class="col s12 m3 l2 sidebar-div" >
+                <ul class="sidebar-ul">
+                     {{#if userProfile}}
+                    <li class="active-li bold">
+                        <a class="waves-effect waves-cyan active navbar-li-a " href="/">
+                            <i class="material-icons">person_outline</i>
+                            <span class="menu-title" data-i18n="User Profile">User Profile</span>
+                        </a>
+                    </li>
+                    {{else}}
+                     <li class="bold">
+                        <a class="waves-effect waves-cyan active navbar-li-a " href="/">
+                            <i class="material-icons">person_outline</i>
+                            <span class="menu-title" data-i18n="User Profile">User Profile</span>
+                        </a>
+                    </li>
+                    {{/if}}
+                    {{#if materialDeliveryPage}}
+                    <li class="bold active-li">
+                        <a class="waves-effect waves-cyan navbar-li-a " href="/materials/delivery-order">
+                            <i class="material-icons">airport_shuttle</i>
+                            <span class="menu-title" data-i18n="User Profile">Delivery order</span>
+                        </a>
+                    </li>
+                     {{else}}
+                    <li class="bold">
+                        <a class="waves-effect waves-cyan navbar-li-a " href="/materials/delivery-order">
+                            <i class="material-icons">airport_shuttle</i>
+                            <span class="menu-title" data-i18n="User Profile">Delivery order</span>
+                        </a>
+                    </li>
+                    {{/if}}
+                    {{#if materialListPage}}
+                    <li class="bold active-li">
+                        <a class="waves-effect waves-cyan navbar-li-a " href="/materials/material-list">
+                            <i class="material-icons">assignment</i>
+                            <span class="menu-title" data-i18n="User Profile">Material list</span>
+                        </a>
+                    </li>
+                    {{else}}
+                     <li class="bold ">
+                        <a class="waves-effect waves-cyan navbar-li-a " href="/materials/material-list">
+                            <i class="material-icons">assignment</i>
+                            <span class="menu-title" data-i18n="User Profile">Material list</span>
+                        </a>
+                    </li>
+                    {{/if}}
+                    {{#if materialRequestPage}}
+                    <li class="bold active-li">
+                        <a class="waves-effect waves-cyan navbar-li-a " href="/materials/material-request">
+                            <i class="material-icons">receipt</i>
+                            <span class="menu-title" data-i18n="User Profile">Material request</span>
+                        </a>
+                    </li>
+                    {{else}}
+                    <li class="bold">
+                        <a class="waves-effect waves-cyan navbar-li-a " href="/materials/material-request">
+                            <i class="material-icons">receipt</i>
+                            <span class="menu-title" data-i18n="User Profile">Material request</span>
+                        </a>
+                    </li>
+                    {{/if}}
+                    {{#if workschedulePage}}
+                    <li class="bold active-li">
+                        <a class="waves-effect waves-cyan navbar-li-a " href="/execution/work-schedule">
+                            <i class="material-icons">schedule</i>
+                            <span class="menu-title" data-i18n="User Profile">Work Schedule</span>
+                        </a>
+                    </li>
+                     {{else}}
+                     <li class="bold">
+                        <a class="waves-effect waves-cyan navbar-li-a " href="/execution/work-schedule">
+                            <i class="material-icons">schedule</i>
+                            <span class="menu-title" data-i18n="User Profile">Work Schedule</span>
+                        </a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+            <div class="col s12 m9 l10 content">
+            {{{body}}}
+            </div>
+        </div>
+        {{>footer}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+</html>

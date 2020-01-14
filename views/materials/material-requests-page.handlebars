@@ -1,0 +1,212 @@
+<div class="row">
+    <div class="col s12 m12 l12 z-depth-3 white-text teal">
+        <h5 class=" center">{{pageData.pageHeading}}</h5>
+    </div>
+</div>
+<a class="btn-floating btn-large waves-effect waves-light red right" href="/materials/material-request"><i class="material-icons">arrow_back</i></a>
+<div class="row">
+    <div class="col s12 m2 l2"></div>
+    <div class="col s12 m8 l8 z-depth-3 white-text teal">
+        <div class="collection">
+            <a href="#!" class="collection-item"><span class="badge" id="material_request_number">{{pageData.material_request_number}}</span>Request Number</a>
+            <a href="#!" class="collection-item"><span class="badge">{{pageData.material_requester}}</span>Requester</a>
+            <a href="#!" class="collection-item"><span class="badge">{{pageData.material_request_status}}</span>Staus</a>
+            <a href="#!" class="collection-item"><span class="badge">{{pageData.created_at}}</span>Requsted date</a>
+        </div>
+    </div>
+    <div class="col s12 m2 l2 " style="padding-top: 10px;">
+        <a class="btn-floating btn-large waves-effect waves-light green right modal-trigger tooltipped" data-position="left" 
+        data-tooltip="Add new item to the request" href="" data-target="modal1" id="add_item"><i class="material-icons">add</i></a>
+    </div>
+    {{#if pageData.isAdmin }}
+    <div class="col s12 m2 l2 " style="padding-top: 10px;">
+        <a class="btn-floating btn-large waves-effect waves-light teal right tooltipped" data-position="left" 
+        data-tooltip="Mark to delivery" href="/materials/material-request-addto-delivery/{{pageData.material_request_number}}"><i class="material-icons">airport_shuttle</i></a>
+    </div>
+    {{/if}}
+</div>
+<div class="row">
+    <table class="highlight">
+        <thead>
+            <tr>
+                <th>Request Number</th>
+                <th>Model</th>
+                <th>Qty</th>
+                <th>Request Status</th>
+                <th>Created on</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#each pageData.material_requests}}
+          <tr>
+            <td>{{this.material_request_number}}</td>
+            <td>{{this.material_model}}</td>
+            <td>{{this.material_qty}}</td>
+            <td><button class="waves-effect waves-light btn changeStatus modal-trigger" data-target="modal2" id="{{this.material_request_number}}">{{this.material_request_status}}</button></td>
+            <td>{{this.created_at}}</td>
+            <td><a class="btn-floating btn-small waves-effect waves-light red deleteReq" href="{{this.material_request_number}}"><i class="material-icons">delete</i></a></td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+</div>
+<div id="modal1" class="modal" >
+    <div class="modal-content">
+    <h4>Add item</h4>
+    <form class="col s12" name="newRequestForm" id="newRequestForm" method="post" >
+        <div class="row">
+            <div class="input-field col s12 m12 l12">
+                <select id="select_category" class="browser-default" required>
+                </select>
+            </div>
+            <div class="input-field col s12 m12 l12">
+                <select id="select_brand" class="browser-default" required>
+                </select>
+            </div>
+            <div class="input-field col s12 m12 l12">
+                <select id="select_model" class="browser-default" name="material_model" required>
+                </select>
+            </div>
+            <div class="input-field col s12 m12 l12" id="required_quantity">
+                <input placeholder="eg:" id="item_quantity" type="text" class="validate" name="material_qty" required>
+                <label for="item_quantity">Quantity</label>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close waves-effect waves-green teal btn-flat" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+<div id="modal2" class="modal" >
+    <div class="modal-content">
+    <h4>Change Status</h4>
+      <select id="change_status" class="input-field">
+        <option value="Open">Open</option>
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+    </select>
+    </div>
+    <div class="modal-footer">
+        <button class="modal-close waves-effect waves-green btn-flat" id="submit_status">Submit</button>
+    </div>
+</div>
+<!--<div id="deliveryModal" class="modal" >
+    <div class="modal-content">
+     <p>Select material</p>
+      {{#each pageData.material_requests}}
+    <label>
+        <input type="checkbox" class="filled-in" checked="" id="{{this.material_request_number}}" />
+        <span>{{this.material_request_number}}</span>
+      </label>
+     {{/each}}
+     <div class="section"></div>
+     <div class="section"></div>
+    <hr/>
+    <p>Add to exisiting</p>
+    </div>
+    <div class="modal-footer">
+        <button class="modal-close waves-effect waves-green green btn-flat" id="add_to_delivery">Yes</button>
+    </div>
+</div>-->
+<script>
+    $(() => {   
+        /*$('#deliveryModal').modal();
+        $('#add_to_delivery').click((event)=>{
+            let checkBoxArray = $("input[type=checkbox]");
+            let addToExisting = 
+            let checkStatus = [];
+            checkBoxArray.each((index,item)=>{
+                if(item.checked==true){
+                     console.log(item.id);
+                }  
+            })    
+        })*/
+
+        $('#change_status').formSelect();
+        $('#modal2').modal();
+        let master_materail_request_number;
+        let materail_request_number;
+        $(".changeStatus").click((event)=>{
+            master_materail_request_number = $("#material_request_number").text();
+            materail_request_number = event.target.id;
+            console.log(master_materail_request_number);
+            console.log(materail_request_number);
+        })
+
+    $("#submit_status").click((event)=>{
+        event.preventDefault();
+        console.log();
+        let changed_status = $("#change_status option:selected").val();
+       location.href=`/materials/material-request-change-status?reqNumber=${master_materail_request_number}&status=${changed_status}&req=${materail_request_number}`;
+    })
+    let materialStatus = $(".changeStatus");
+    materialStatus.each((item)=>{
+        if(materialStatus[item].innerText == 'COMPLETED'){
+            let classList = materialStatus[item].getAttribute('class');
+            classList += " green";
+            materialStatus[item].setAttribute('class',classList)
+        }else if(materialStatus[item].innerText == 'PENDING'){
+            let classList = materialStatus[item].getAttribute('class');
+            classList += " yellow";
+            materialStatus[item].setAttribute('class',classList)
+        }else if(materialStatus[item].innerText == 'OPEN'){
+            let classList = materialStatus[item].getAttribute('class');
+            classList += " teal";
+            materialStatus[item].setAttribute('class',classList)
+        }else if(materialStatus[item].innerText == 'DELIVERY'){
+            let classList = materialStatus[item].getAttribute('class');
+            classList += " red";
+            materialStatus[item].setAttribute('class',classList)
+        }
+    })
+
+
+
+        $('#modal1').modal();
+        $(".deleteReq").click((event)=>{
+            event.preventDefault();
+            let master_material_request_number = $("#material_request_number").text();
+            let material_request_number = event.target.parentNode.parentNode.parentNode.firstElementChild.textContent;
+            window.location.href=`/materials/material-request-delete?master=${master_material_request_number}&req=${material_request_number}`;
+        })
+        $('.tooltipped').tooltip();
+        $("#add_item").bind("click",(event)=>{
+            event.preventDefault();
+            $.getJSON("/materials/material-request-add/get-all-material").done((data)=>{
+
+                let categoryOptions = "<option value=''>Choose Category</option>";
+                data.forEach((item)=>{
+                    categoryOptions = categoryOptions +'<option value="'+item.material_category+'">'+item.material_category+'</option>';
+                })
+                $("#select_category").html(categoryOptions);
+                $("#select_category").change(function(){
+                    let selected =  $("#select_category").val();
+                    let brandOptions = "<option value=''>Choose Brand</option>";
+                    let filteredBrandArray =  data.filter((item)=>{
+                        return item.material_category == selected;
+                    });
+                    filteredBrandArray.forEach((item)=>{
+                        brandOptions = brandOptions +'<option value="'+item.material_brand+'">'+item.material_brand+'</option>';
+                    });
+                    $("#select_brand").html(brandOptions);
+                    $("#select_brand").change(function(){
+                        let selected =  $("#select_brand").val();
+                        let modelOptions = "<option value=''>Choose Model</option>";
+                        let filteredModelArray =  data.filter((item)=>{
+                            return item.material_brand == selected;
+                        })
+                        filteredModelArray.forEach((item)=>{
+                            modelOptions = modelOptions +'<option value="'+item.material_model+'">'+item.material_model+'</option>';
+                        });
+                        $("#select_model").html(modelOptions);
+                        let material_request_number = $("#material_request_number").text();
+                        console.log(material_request_number);
+                        $("#newRequestForm").attr('action', `/materials/material-request-edit/${material_request_number}`);
+                    });
+                })
+            })
+        })
+    })
+</script>
