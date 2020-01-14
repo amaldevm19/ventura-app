@@ -1,11 +1,13 @@
 const {MaterialRequests, MaterialRequestsArray} = require('../../model/materials/materialRequest.model');
 exports.getAllMaterialRequest = function (req, res, next) {
+
     let title = "Material Requests";
     let pageHeading = "All Material Request";
     let materialRequest = true;
     let pageData = {
         title,
         pageHeading,
+        userFirstName : req.session.user.firstName
         
     }
     MaterialRequests.find({},(err,data)=>{
@@ -18,7 +20,6 @@ exports.getAllMaterialRequest = function (req, res, next) {
     })
     
 };
-
 exports.newMaterialRequestPage = function (req, res, next) {
     if(!req.params.reqNumber){
     let title = "Material Requests";

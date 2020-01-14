@@ -45,7 +45,7 @@
             <td>{{this.material_qty}}</td>
             <td><button class="waves-effect waves-light btn changeStatus modal-trigger" data-target="modal2" id="{{this.material_request_number}}">{{this.material_request_status}}</button></td>
             <td>{{this.created_at}}</td>
-            <td><a class="btn-floating btn-small waves-effect waves-light red deleteReq" href="{{this.material_request_number}}"><i class="material-icons">delete</i></a></td>
+            <td><a class="btn-floating btn-small waves-effect waves-light red deleteReq" href="{{this.material_request_number}}"><i class="material-icons" >delete</i></a></td>
           </tr>
         {{/each}}
         </tbody>
@@ -111,6 +111,7 @@
     </div>
 </div>-->
 <script>
+
     $(() => {   
         /*$('#deliveryModal').modal();
         $('#add_to_delivery').click((event)=>{
@@ -124,6 +125,7 @@
             })    
         })*/
 
+   
         $('#change_status').formSelect();
         $('#modal2').modal();
         let master_materail_request_number;
@@ -167,9 +169,14 @@
         $('#modal1').modal();
         $(".deleteReq").click((event)=>{
             event.preventDefault();
+           if(!confirm("Are you sure?")){
+               console.log("Success")
+           }else{
+            
             let master_material_request_number = $("#material_request_number").text();
             let material_request_number = event.target.parentNode.parentNode.parentNode.firstElementChild.textContent;
             window.location.href=`/materials/material-request-delete?master=${master_material_request_number}&req=${material_request_number}`;
+            }
         })
         $('.tooltipped').tooltip();
         $("#add_item").bind("click",(event)=>{
@@ -194,7 +201,7 @@
                     $("#select_brand").change(function(){
                         let selected =  $("#select_brand").val();
                         let modelOptions = "<option value=''>Choose Model</option>";
-                        let filteredModelArray =  data.filter((item)=>{
+                        let filteredModelArray =  filteredBrandArray.filter((item)=>{
                             return item.material_brand == selected;
                         })
                         filteredModelArray.forEach((item)=>{

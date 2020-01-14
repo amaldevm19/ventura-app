@@ -25,7 +25,7 @@
             <td><a class="waves-effect waves-light btn changeStatus check-admin modal-trigger"  data-target="modal1" id="{{this.material_request_number}}">{{this.material_delivery_status}}</a></td>
             <td>{{this.created_at}}</td>
             <td><a class="btn-floating btn-small waves-effect waves-light check-admin green"  href="/materials/material-request-edit/{{this.material_request_number}}"><i class="material-icons">edit</i></a></td>
-            <td><a class="btn-floating btn-small waves-effect waves-light check-admin red"  href="/materials/material-request-delete/{{this.material_request_number}}"><i class="material-icons">delete</i></a></td>
+            <td><a class="btn-floating btn-small waves-effect waves-light check-admin red"  href="/materials/material-request-delete/{{this.material_request_number}}"><i class="material-icons" onclick="return confirm('Are you sure?')">delete</i></a></td>
           </tr>
         {{/each}}
         </tbody>

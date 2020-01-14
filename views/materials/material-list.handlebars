@@ -16,7 +16,7 @@
 {{/if}}
 <button class='filter btn modal-trigger' id='filter_category_button' data-target="modal1" >Filter category</button>
 <button class='filter btn modal-trigger' id='filter_model_button' data-target="modal2" >Filter model</button>
-
+<input type="text" id='hidden_for_disabled_button' hidden value={{pageData.isAdmin}} />
 <a class="btn-floating btn-large waves-effect waves-light red right" href="/materials/material-list-add"><i class="material-icons">add</i></a>
 
 <div class="row">
@@ -38,7 +38,7 @@
             <td>{{this.material_category}}</td>
             <td>{{this.material_brand}}</td>
             <td>{{this.material_description}}</td>
-            <td><a class="btn-floating btn-small waves-effect waves-light red" href="/materials/material-list-add/{{this.material_model}}"><i class="material-icons">delete</i></a></td>
+            <td><a class="btn-floating btn-small waves-effect waves-light red delete-button" href="/materials/material-list-add/{{this.material_model}}" onclick="return confirm('Are you sure?')"><i class="material-icons">delete</i></a></td>
           </tr>
         {{/each}}
         </tbody>
@@ -94,6 +94,10 @@
             window.location.href = `/materials/material-list?filter_cat=${filter_cat}&filter_name=material_model`;
         }});
     });
-
+    console.log($("#hidden_for_disabled_button").val());
+    if($("#hidden_for_disabled_button").val()=="false"){
+      console.log()
+      $(".delete-button").attr("disabled","disabled")
+    }
   });
 </script>

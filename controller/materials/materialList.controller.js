@@ -11,7 +11,10 @@ exports.getMaterial = function (req, res, next) {
     let filterList = {};
     let filter_name_ = req.query.filter_name;
     let filter_cat = req.query.filter_cat;
-    
+    let isAdmin = req.session.user.isAdmin;
+    let isNotAdmin = isAdmin? false:true;
+    console.log("Is admin :", isAdmin );
+    console.log("Is not admin :", isNotAdmin )
     Material.find({},(err, data)=>{
         if(err){
             next(err);
@@ -19,6 +22,7 @@ exports.getMaterial = function (req, res, next) {
         if(filter_name_){
             filterd_doc = [];
             data.forEach((item)=>{
+                
               if(item[filter_name_] == filter_cat){
                 filterd_doc.push(item);
               }
@@ -53,7 +57,9 @@ exports.getMaterial = function (req, res, next) {
             title,
             pageHeading,
             pageArray,
-            pageName
+            pageName,
+            isAdmin,
+            isNotAdmin
         }
         res.render('./materials/material-list', {pageData, materialTable, filterList,pageName, materialListPage:true});
     })

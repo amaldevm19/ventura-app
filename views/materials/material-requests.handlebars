@@ -4,7 +4,7 @@
     </div>
 </div>
 <a class="btn-floating btn-large waves-effect waves-light red right" href="/materials/material-request-add-new"><i class="material-icons">add</i></a>
-
+<input type="text" hidden id="edit_delete_disable" value={{pageData.userFirstName}}>
 <div class="row">
     <table class="highlight">
         <thead>
@@ -21,11 +21,11 @@
         {{#each pageData.material_requests}}
           <tr>
             <td>{{this.material_request_number}}</td>
-            <td>{{this.material_requester}}</td>
+            <td class="requester">{{this.material_requester}}</td>
             <td><a class="waves-effect waves-light btn changeStatus modal-trigger" data-target="modal1" id="{{this.material_request_number}}">{{this.material_request_status}}</a></td>
             <td>{{this.created_at}}</td>
-            <td><a class="btn-floating btn-small waves-effect waves-light green" href="/materials/material-request-edit/{{this.material_request_number}}"><i class="material-icons">edit</i></a></td>
-            <td><a class="btn-floating btn-small waves-effect waves-light red" href="/materials/material-request-delete/{{this.material_request_number}}"><i class="material-icons">delete</i></a></td>
+            <td><a class="btn-floating btn-small waves-effect waves-light green disable-button" href="/materials/material-request-edit/{{this.material_request_number}}"><i class="material-icons">edit</i></a></td>
+            <td><a class="btn-floating btn-small waves-effect waves-light red" href="/materials/material-request-delete/{{this.material_request_number}}" onclick="return confirm('Are you sure?')"><i class="material-icons">delete</i></a></td>
           </tr>
         {{/each}}
         </tbody>
@@ -79,6 +79,14 @@ $(() => {
             materialStatus[item].setAttribute('disabled','disabled')
             classList += " red";
             materialStatus[item].setAttribute('class',classList)
+        }
+    })
+
+    let requesterArray = $(".requester");
+    requesterArray.each((index, item,arr)=>{
+        if(!(item.innerText == $("#edit_delete_disable").val())){
+            requesterArray[index].parentNode.lastElementChild.firstElementChild.setAttribute("disabled","disabled");
+            console.log(requesterArray[index].parentNode.lastElementChild.previousElementSibling.firstElementChild.setAttribute("disabled","disabled"));
         }
     })
  })
