@@ -7,7 +7,8 @@ exports.getAllMaterialRequest = function (req, res, next) {
     let pageData = {
         title,
         pageHeading,
-        userFirstName : req.session.user.firstName
+        userFirstName : req.session.user.firstName,
+        isAdmin:req.session.user.isAdmin
         
     }
     MaterialRequests.find({},(err,data)=>{

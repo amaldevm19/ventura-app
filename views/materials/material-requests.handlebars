@@ -5,6 +5,7 @@
 </div>
 <a class="btn-floating btn-large waves-effect waves-light red right" href="/materials/material-request-add-new"><i class="material-icons">add</i></a>
 <input type="text" hidden id="edit_delete_disable" value={{pageData.userFirstName}}>
+<input type="text" hidden id="isAdmin_" value={{pageData.isAdmin}}>
 <div class="row">
     <table class="highlight">
         <thead>
@@ -81,12 +82,14 @@ $(() => {
             materialStatus[item].setAttribute('class',classList)
         }
     })
-
+    console.log($("#isAdmin_").val());
     let requesterArray = $(".requester");
     requesterArray.each((index, item,arr)=>{
         if(!(item.innerText == $("#edit_delete_disable").val())){
             requesterArray[index].parentNode.lastElementChild.firstElementChild.setAttribute("disabled","disabled");
+            if($("#isAdmin_").val() == "false"){
             console.log(requesterArray[index].parentNode.lastElementChild.previousElementSibling.firstElementChild.setAttribute("disabled","disabled"));
+        }
         }
     })
  })
